@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+  <!-- 
+  __ _ _ __  _ __   __ _       _ __ ___   __ _ _ __(_) __ _ 
+ / _` | '_ \| '_ \ / _` |_____| '_ ` _ \ / _` | '__| |/ _` |
+| (_| | | | | | | | (_| |_____| | | | | | (_| | |  | | (_| |
+ \__,_|_| |_|_| |_|\__,_|     |_| |_| |_|\__,_|_|  |_|\__,_|                                                      
+ -->
+<html>
+	<head>
+		<meta charset="utf8">
+		<link href="anna.css" rel="stylesheet" >
+		<link href='http://fonts.googleapis.com/css?family=Rochester' rel='stylesheet' type='text/css'>
+		<script src="countUp/countUp.js"></script>
+	</head>
+
+	<header>
+		Cupidon's thinks
+	</header>
+
+	<body>
+		<div class="Girl">
+			<img src="girl-icon.png"><br>
+			<input type="text" id="girlDay" placeholder="Day">
+			<input type="text" id="girlMonth" placeholder="Month">
+		</div>
+
+		<div class="Boy">
+			<img src="boy-icon.png"><br>
+			<input type="text" id="boyDay" placeholder="Day">
+			<input type="text" id="boyMonth" placeholder="Month">
+		</div>
+
+		<div id="chest" onclick="cupidon()">
+			<div class="heart left side top"></div>
+			<div class="heart center">&hearts;</div>
+			<div class="heart right side"></div>
+		</div>
+<p id="beMyValentineText" onclick="cupidon()" align="center">Be My<br>Valentine</p>
+	</body>
+<script>
+var GirlSign, BoySign;
+var Months = ["ianuarie", "februarie", "martie", "aprilie", "mai", "iunie", "iulie", "august", "septembrie", "octombrie", "noiembrie", "decembrie"];
+var Zodiac = ["Berbec","Taur","Gemeni","Rac","Leu","Fecioara","Balanta","Scorpion","Sagetator","Capricorn","Varsator","Pesti"];
+var Sign = [
+		[1,2,0,3,0,2,1,2,0,3,0,2],
+		[2,1,2,0,3,0,2,1,2,0,3,0],
+		[0,2,1,2,0,3,0,2,1,2,0,3],
+		[3,0,2,1,2,0,3,0,2,1,2,0],
+		[0,3,0,2,1,2,0,3,0,2,1,2],
+		[2,0,3,0,2,1,2,0,3,0,2,1],
+		[1,2,0,3,0,2,1,2,0,3,0,2],
+		[2,1,2,0,3,0,2,1,2,0,3,0],
+		[0,2,1,2,0,3,0,2,1,2,0,3],
+		[3,0,2,1,2,0,3,0,2,1,2,0],
+		[0,3,0,2,1,2,0,3,0,2,1,2],
+		[2,0,3,0,2,1,2,0,3,0,2,1]
+			];
+	function cupidon()
+		{	//Girl Data
+			var GirlDay = document.getElementById("girlDay").value;
+			var GirlMonth = document.getElementById("girlMonth").value;
+			
+			// Boy Data
+			var BoyDay = document.getElementById("boyDay").value;
+			var BoyMonth = document.getElementById("boyMonth").value;
+
+			//Get sign of Zodiac
+			GirlSign = getZodiac(GirlDay,GirlMonth);
+			BoySign = getZodiac(BoyDay,BoyMonth);
+			
+			//Get compatibility
+			var Compatibility = getCompatibility(GirlSign, BoySign);
+		}
+
+	function getZodiac(Day, Month)
+		{	//Variable Declaration
+			var sign;
+			var MonthNumber = Month;
+
+			//Get Month Number
+			if ( Month.length > 2)
+				MonthNumber=getMonth(Month);
+
+			//Get Sign of Zodiac
+			if ( Day >= 21 && MonthNumber == 3 || Day <= 20 && MonthNumber == 4 )
+				sign = 1;//Zodiac[0];
+			if ( Day >= 21 && MonthNumber == 4 || Day <= 21 && MonthNumber == 5 )
+				sign = 2;//Zodiac[1];
+			if ( Day >= 22 && MonthNumber == 5 || Day <= 21 && MonthNumber == 6 )
+				sign = 3;//Zodiac[2];
+			if ( Day >= 22 && MonthNumber == 6 || Day <= 22 && MonthNumber == 7 )
+				sign = 4;//Zodiac[3];
+			if ( Day >= 23 && MonthNumber == 7 || Day <= 22 && MonthNumber == 8 )
+				sign = 5//Zodiac[4];
+			if ( Day >= 23 && MonthNumber == 8 || Day <= 23 && MonthNumber == 9 )
+				sign = 6;//Zodiac[5];
+			if ( Day >= 24 && MonthNumber == 9 || Day <= 23 && MonthNumber == 10 )
+				sign = 7;//Zodiac[6];
+			if ( Day >= 24 && MonthNumber == 10 || Day <= 22 && MonthNumber == 11 )
+				sign = 8;//Zodiac[7];
+			if ( Day >= 23 && MonthNumber == 11 || Day <= 21 && MonthNumber == 12 )
+				sign = 9;//Zodiac[8];
+			if ( Day >= 22 && MonthNumber == 12 || Day <= 20 && MonthNumber == 1 )
+				sign = 10;//Zodiac[9];
+			if ( Day >= 21 && MonthNumber == 1 || Day <= 19 && MonthNumber == 2 )
+				sign = 11;//odiac[10];
+			if ( Day >= 20 && MonthNumber == 2 || Day <= 20 && MonthNumber == 3 )
+				sign = 12;//Zodiac[11];
+			console.log(sign);
+			//Return Sign
+			return sign;
+		}
+	function getMonth(value)
+		{	var i=0;
+			while(value.toLowerCase() != Months[i])
+				i++;
+			return i+1;
+		}
+
+	function getCompatibility(value1, value2)
+		{var x;
+			switch(Sign[value1-1][value2-1])
+				{
+					case 0 : x = Math.random() * (100-76) + 76;animationP(x.toFixed(2));break;
+					case 1 : x = Math.random() * (75-50) + 50;animationP(x.toFixed(2));break;
+					case 2 : x = Math.random() * (49-26) + 49;animationP(x.toFixed(2));break;
+					case 3 : x = Math.random() * (25-0) + 25;animationP(x.toFixed(2));break;
+				}
+		}
+	function animationP(x)
+		{	
+			var numAnim = new CountUp("beMyValentineText", 0, x, 2, 2);
+			numAnim.start();
+		}
+</script>
+</html>
